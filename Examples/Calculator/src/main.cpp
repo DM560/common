@@ -7,6 +7,7 @@ public:
 	double value;
 };
 
+
 double expression()	// read and evaluate: 1   1+2.5   1+2+3.14  etc.
 {
   double left = term(); 		// get the Term
