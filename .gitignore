@@ -260,3 +260,6 @@ paket-files/
 __pycache__/
 *.pyc
 /Examples/ErrorHandling/main.exe
+*.sln
+*.vcxproj
+*.filters
