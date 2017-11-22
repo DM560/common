@@ -1,9 +1,11 @@
-#include "Chrono.h"
+#include "chrono.h"
+
 namespace Chrono {
   // member function definitions:
   Date::Date(int yy, Month mm, int dd)
     : y{yy}, m{mm}, d{dd}
 {
+	cout<<"constructor"<<endl;
   if (!is_date(yy,mm,dd)) throw Invalid{};
 }
   const Date& default_date()
@@ -29,9 +31,9 @@ namespace Chrono {
   }
   void Date::add_year(int n)
   {
-    if (m==feb && d==29 && !leapyear(y+n)) {
+    if (m==Month::feb && d==29 && !leapyear(y+n)) {
       // beware of leap years!
-      m = mar;
+      m = Month::mar;
       // use March 1 instead of February 29
       d = 1;
     }
@@ -77,7 +79,7 @@ namespace Chrono {
   ostream& operator<<(ostream& os, const Date& d)
   {
     return os << '(' << d.year()
-              << ',' << d.month()
+              << ',' << int(d.month())
               << ',' << d.day() << ')';
   }
   istream& operator>>(istream& is, Date& dd)
