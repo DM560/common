@@ -64,6 +64,7 @@ namespace Chrono {
   bool leapyear(int y)
   {
     // see exercise 10
+	  return false;
   }
 
   bool operator==(const Date& a, const Date& b)
@@ -103,16 +104,20 @@ namespace Chrono {
   Day day_of_week(const Date& d)
   {
     // . . .
+	  return Day{};
   }
 
   Date next_Sunday(const Date& d)
   {
     // ...
+	  return Date{};
   }
   Date next_weekday(const Date& d)
   {
     // . . .
+	  return Date{};
   }
+
 }
 // Chrono
 
