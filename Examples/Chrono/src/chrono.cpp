@@ -20,6 +20,19 @@ namespace Chrono {
      d{default_date().day()}
 {
 }
+
+ Date& Date::operator=(const Date& a) {
+	  y = a.y;
+	  m = a.m;
+	  d = a.d;
+	  return *this;
+ }
+ 
+  Date::Date(const Date& a) {
+	  y = a.y;
+	  m = a.m;
+	  d = a.d;
+  }
   void Date:: add_day(int n)
   {
     // . . .

@@ -15,6 +15,8 @@ namespace Chrono {
     Date(int y, Month m, int d);
     // check for valid date and initialize
     Date();
+	Date(const Date& a);
+	Date& operator=(const Date& a);
     // default constructor
     // the default copy operations are fine
     // nonmodifying operations:
