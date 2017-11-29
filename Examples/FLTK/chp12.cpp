@@ -9,7 +9,7 @@ int main()
    
    Simple_window win(tl,600,400,"Canvas"); 	// make a simple window
    
-   Polygon poly;		// make a shape (a polygon)
+   Graph_lib::Polygon poly;		// make a shape (a polygon)
    
    poly.add(Point(300,200));	// add three points to the polygon
    poly.add(Point(350,100));
