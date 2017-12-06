@@ -8,7 +8,7 @@ namespace Graph {
 
 
 ostream& operator<<(ostream& os, const Node& v) {
-   return os<<v.label;   
+   return os<<v.label<<" ("<<v.x<<","<<v.y<<")";   
 }
 
 
@@ -111,7 +111,7 @@ int Graph::addNode(string lab, int index) {
    Node* pv=new Node;
    pv->index=index;
    pv->label=lab;
-   double theta = M_PI/n_nodes*index;
+   double theta = 2*M_PI/n_nodes*index;
    pv->x=cos(theta);
    pv->y=sin(theta);
    nodes.push_back(pv);
@@ -121,6 +121,10 @@ int Graph::addNode(string lab, int index) {
 
 ostream& operator<<(ostream& os, const Graph& g) {
    os<<g.getNodesN() <<" nodes; "<<g.getEdgesN()<<" edges\n";
+   for (const Node* pv : g.getNodes()) {
+      os<<*pv<<" ";
+   }
+   os<<"\n";
    for (const Edge* pe: g.getEdges()) {
       os<<*pe<<"\n";
    }

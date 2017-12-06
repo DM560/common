@@ -23,14 +23,27 @@ int main (int argc, char **argv) {
    Simple_window win(tl,600,400,"Canvas");      // make a simple window
 
 
-   vector<Graph_lib::Circle> circles;
+   vector<Graph_lib::Circle*> circles;
+   vector<Graph_lib::Text*> labels;
 
    for (Graph::Node* v : g.getNodes()) {
-     circles.push_back( Graph_lib::Circle(Graph_lib::Point(100*v->x, 100*v->y),20) );
+     circles.push_back(new Graph_lib::Circle(Graph_lib::Point(200+100*v->x, 200-100*v->y),15) );
+     labels.push_back(new Graph_lib::Text(Graph_lib::Point(200+100*v->x, 200-100*v->y),v->label) );
+
+     win.attach(*circles[circles.size()-1]);    
+     win.attach(*labels[labels.size()-1]);    
+
    }
-   
-   for (Graph_lib::Circle& c: circles) {
-     win.attach(c);
+
+   vector<Graph_lib::Line*> lines;
+   for (Graph::Edge* pe : g.getEdges() ) {
+
+    lines.push_back(new Graph_lib::Line(
+     circles[pe->from->index]->center(),
+     circles[pe->to->index]->center()
+    ));
+     win.attach(*lines[lines.size()-1]);
+    
    }
    
    win.wait_for_button();       // give control to the display engine
