@@ -17,6 +17,7 @@ struct Node {
 ostream& operator<<(ostream& os, const Node& v);
 
 struct Edge {
+   int index;
    Node *from; // alternatively, put here the index of the node
    Node *to; // alternatively, put here the index of the node
    string label;

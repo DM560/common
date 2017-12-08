@@ -61,6 +61,7 @@ void Graph::readDIMACS(string filename) {
          }
          if (!already_in) {
             Edge* pe=new Edge;
+            pe->index=edge_count;
             pe->from = getNode(from);
             pe->to = getNode(to);
             pe->label=to_string(edge_count++);            
