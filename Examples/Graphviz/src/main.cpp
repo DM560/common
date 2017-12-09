@@ -1,54 +1,59 @@
 #include<cstdio>
 #include<cstdlib>
+
 #include "../../FLTK/Simple_window.h"
 #include "../../FLTK/Graph.h"
 
 #include "Graph.h"
 
 using namespace std;
-//using namespace Graph_lib;   // use our graphics interface library
+
+
+
+Graph_lib::Point tl(100,200);  // the top left corner of the window                 
+Graph_lib::Window win(tl,1200,800,"Graphviz");      
+
+
+
+void call_back( void *graph)
+{
+  /*
+	Implement here the update of the drawing
+  */
+  
+  Fl::check();
+  Fl::redraw();
+     
+  Fl::repeat_timeout(1/48.0,call_back,graph);
+
+}
+
+
 
 int main (int argc, char **argv) {
+  string inputfile;
   if (argc==2) {
+	inputfile=argv[1];
+	timeLimit = atoi(argv[2]);
   }
   else {
-    cout<<"graph filename"<<endl;
+	cout<<"graph filename"<<endl;
+	exit(EXIT_FAILURE);
   }
 
-    Graph::Graph g(argv[1]);
-    cout<<g<<endl;
+  /*
+	Read the graph
+   */
+  /*
+	Implement here the initial drawing of the graph
+   */
   
-   Graph_lib::Point tl(100,200);                   // a point 
-   
-   Simple_window win(tl,600,400,"Canvas");      // make a simple window
+  win.color(Graph_lib::Color::white); // we set the background color
+  Fl::add_timeout(1,call_back,&g);
+  win.end(); // we tell FLTK that we will not add Widgets 
+  win.show();
+  return Fl::run();
 
-
-   vector<Graph_lib::Circle*> circles;
-   vector<Graph_lib::Text*> labels;
-
-   for (Graph::Node* v : g.getNodes()) {
-     circles.push_back(new Graph_lib::Circle(Graph_lib::Point(200+100*v->x, 200-100*v->y),15) );
-     labels.push_back(new Graph_lib::Text(Graph_lib::Point(200+100*v->x, 200-100*v->y),v->label) );
-
-     win.attach(*circles[circles.size()-1]);    
-     win.attach(*labels[labels.size()-1]);    
-
-   }
-
-   vector<Graph_lib::Line*> lines;
-   for (Graph::Edge* pe : g.getEdges() ) {
-
-    lines.push_back(new Graph_lib::Line(
-     circles[pe->from->index]->center(),
-     circles[pe->to->index]->center()
-    ));
-     win.attach(*lines[lines.size()-1]);
-    
-   }
-   
-   win.wait_for_button();       // give control to the display engine
-
- 
-  
-  exit(EXIT_SUCCESS);
 }
+
+
